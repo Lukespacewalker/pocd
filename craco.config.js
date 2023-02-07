@@ -1,14 +1,14 @@
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 
 module.exports = {
-  style: {
+  /*style: {
     postcss: {
       loaderOptions: (postcssLoaderOptions) => {
         postcssLoaderOptions.postcssOptions.config = true;
         return postcssLoaderOptions;
       },
     },
-  },
+  },*/
   plugins: [
     {
       plugin: {
