@@ -8,7 +8,7 @@ import {
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
-import { Breadcrumb, Layout, Menu, theme,  Space, Table, Tag  } from 'antd';
+import { Breadcrumb, Layout, Menu, theme, Space, Table, Tag } from 'antd';
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -29,7 +29,7 @@ function getItem(
 }
 
 const items: MenuItem[] = [
-  getItem('Option 1', '1', <PieChartOutlined />),
+  getItem('Users', '1', <UserOutlined />),
   getItem('Option 2', '2', <DesktopOutlined />),
   getItem('User', 'sub1', <UserOutlined />, [
     getItem('Tom', '3'),
@@ -124,7 +124,6 @@ const data: DataType[] = [
     tags: ['cool', 'teacher'],
   },
 ];
-
 
 const App: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
