@@ -16,7 +16,7 @@ import {
   Routes,
   useLocation,
 } from "react-router-dom";
-import { AppRoutes } from "AppRoutes";
+import { AppRoutes } from "./AppRoutes";
 import LoginLayout from "@pages/login/LoginLayout";
 import AdminLayout from "@pages/admin/AdminLayout";
 import UserLayout from "@pages/user/UserLayout";
@@ -36,7 +36,7 @@ const App: React.FC = () => {
       <Route path={AppRoutes.Login.Layout.absolute} element={<LoginLayout />} />
 
       <Route path={AppRoutes.Admin.Layout.absolute} element={<AdminLayout />} />
-      
+
       <Route path={AppRoutes.User.Layout.absolute} element={<UserLayout />} />
     </Routes>
   );

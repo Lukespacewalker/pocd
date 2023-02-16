@@ -1,4 +1,4 @@
-import { ReactECharts } from "components/echart";
+import { ReactECharts } from "@components/echart";
 import { useEffect, useState } from "react";
 
 type InitialFormData = {

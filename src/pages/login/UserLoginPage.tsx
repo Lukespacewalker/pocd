@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Checkbox, Form, Input } from "antd";
-import { AppRoutes } from "AppRoutes";
+import { AppRoutes } from "@/AppRoutes";
 
 const UserLoginPage: React.FC = () => {
   const navigate = useNavigate();

@@ -1,7 +1,6 @@
 import { ConfigProvider } from "antd";
-import App from "App";
+import App from "./App";
 import { BrowserRouter } from "react-router-dom";
-import { Helmet } from "react-helmet";
 
 const AppContainer: React.FC = () => {
   return (

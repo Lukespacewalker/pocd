@@ -1,4 +1,4 @@
-import { AppRoutes } from "AppRoutes";
+import { AppRoutes } from "@/AppRoutes";
 import { useNavigate } from "react-router-dom";
 
 const LoginPageSelector: React.FC = () => {

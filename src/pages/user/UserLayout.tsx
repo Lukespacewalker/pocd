@@ -10,9 +10,9 @@ import type { MenuProps } from "antd";
 import { Breadcrumb, Layout, Menu, theme } from "antd";
 import AdminUserPage from "@pages/admin/AdminUserPage";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
-import { AppRoutes } from "AppRoutes";
+import { AppRoutes } from "@/AppRoutes";
 import UserDataPage from "./UserDataPage";
-import { ReactECharts } from "components/echart";
+import { ReactECharts } from "@components/echart";
 
 const { Header, Content, Footer, Sider } = Layout;
 
