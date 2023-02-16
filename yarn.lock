@@ -719,7 +719,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:^18.0.10":
+"@types/react-dom@npm:^18.0.11":
   version: 18.0.11
   resolution: "@types/react-dom@npm:18.0.11"
   dependencies:
@@ -728,7 +728,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:^18.0.27":
+"@types/react@npm:*, @types/react@npm:^18.0.28":
   version: 18.0.28
   resolution: "@types/react@npm:18.0.28"
   dependencies:
@@ -2163,8 +2163,8 @@ __metadata:
   dependencies:
     "@ant-design/icons": ^5.0.1
     "@types/node": ^18.13.0
-    "@types/react": ^18.0.27
-    "@types/react-dom": ^18.0.10
+    "@types/react": ^18.0.28
+    "@types/react-dom": ^18.0.11
     "@vitejs/plugin-react": ^3.1.0
     antd: ^5.2.1
     autoprefixer: ^10.4.13
@@ -2176,8 +2176,8 @@ __metadata:
     react-i18next: ^12.1.5
     react-router-dom: ^6.8.1
     tailwindcss: ^3.2.6
-    typescript: ^4.9.3
-    vite: ^4.1.0
+    typescript: ^4.9.5
+    vite: ^4.1.1
   languageName: unknown
   linkType: soft
 
@@ -3309,7 +3309,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^4.9.3":
+"typescript@npm:^4.9.5":
   version: 4.9.5
   resolution: "typescript@npm:4.9.5"
   bin:
@@ -3319,7 +3319,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^4.9.3#~builtin<compat/typescript>":
+"typescript@patch:typescript@^4.9.5#~builtin<compat/typescript>":
   version: 4.9.5
   resolution: "typescript@patch:typescript@npm%3A4.9.5#~builtin<compat/typescript>::version=4.9.5&hash=23ec76"
   bin:
@@ -3368,7 +3368,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^4.1.0":
+"vite@npm:^4.1.1":
   version: 4.1.1
   resolution: "vite@npm:4.1.1"
   dependencies:
