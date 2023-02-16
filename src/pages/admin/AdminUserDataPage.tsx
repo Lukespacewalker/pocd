@@ -1,49 +1,150 @@
 import { ReactECharts } from "components/echart";
+import { useEffect, useState } from "react";
+
+type InitialFormData = {
+  moca: number;
+  barthelIndex: number;
+
+  hasDementia: boolean;
+  hasStroke: boolean;
+  hasDiabetes: boolean;
+  hasCardiacSurgery: boolean;
+
+  benzodiazepeneBeforeSurgery: number | null;
+  benzodiazepeneDuringSurgery: number | null;
+
+  useDexmedetomidine: boolean;
+
+  hasIntraoperativeDesaturation: boolean;
+  hasIntraoperativeHypotension: boolean;
+
+  hasNIRSMonitoring: boolean;
+  hasBISMonitoring: boolean;
+
+  intraoperativeBloodLoss: number;
+
+  operativeTime: number;
+
+  hasPerioperativeBloodTransfusion: boolean;
+
+  date: Date;
+};
+
+type FormData = {
+  moca: number;
+  barthelIndex: number;
+
+  date: Date;
+};
+
+type AllData = {
+  initial: InitialFormData;
+  follow: Array<FormData>;
+};
 
 const AdminUserDataPage: React.FC = () => {
-  return (
+  const [formData, setFormData] = useState<AllData>();
+  const [ready, setIsReady] = useState(false);
+  useEffect(() => {
+    setFormData({
+      initial: {
+        date: new Date("2022-01-01T12:00:00+07:00"),
+
+        moca: 30,
+        barthelIndex: 60,
+
+        hasDementia: false,
+        hasStroke: false,
+        hasDiabetes: true,
+        hasCardiacSurgery: false,
+
+        benzodiazepeneBeforeSurgery: 10,
+        benzodiazepeneDuringSurgery: 20,
+
+        useDexmedetomidine: true,
+
+        hasIntraoperativeDesaturation: false,
+        hasIntraoperativeHypotension: false,
+
+        hasNIRSMonitoring: true,
+        hasBISMonitoring: true,
+
+        intraoperativeBloodLoss: 300,
+
+        operativeTime: 90,
+
+        hasPerioperativeBloodTransfusion: true,
+      },
+      follow: [
+        {
+          date: new Date("2022-01-08T12:00:00+07:00"),
+          moca: 20,
+          barthelIndex: 40,
+        },
+        {
+          date: new Date("2022-02-01T12:00:00+07:00"),
+          moca: 30,
+          barthelIndex: 60,
+        },
+        {
+          date: new Date("2022-04-01T12:00:00+07:00"),
+          moca: 40,
+          barthelIndex: 80,
+        },
+        {
+          date: new Date("2023-01-01T12:00:00+07:00"),
+          moca: 50,
+          barthelIndex: 90,
+        },
+      ],
+    });
+
+    setIsReady(true);
+  }, []);
+
+  return formData ? (
     <div className="p-6">
       <h3>นาย ปุณพจน์ พัฒนปรีชา</h3>
-      <h4>MOCA</h4>
+      <h4>แผนภูมิ</h4>
       <div className="card relative bg-slate-100 my-6">
         <ReactECharts
           style={{ width: "1200px", height: "300px" }}
           option={{
-            xAxis: {
-              type: "category",
-              boundaryGap: false,
-              data: ["ก่อนผ่าตัด", "1 สัปดาห์", "1 เดือน", "3 เดือน", "1 ปี"],
+            legend: {
+              data: ["MOCA", "ADL"],
             },
+            tooltip: {
+              trigger: "axis",
+            },
+            xAxis: {
+              type: "time",
+              boundaryGap: false,
+              /*axisLabel: {
+                formatter: (value: Date)=> {
+                  console.log(value)
+                  return value.toISOString();
+                },
+              },*/
+            } as any,
             yAxis: {
               type: "value",
             },
             series: [
               {
-                data: [5, 6, 8, 10, 11],
+                name: "MOCA",
+                data: [
+                  [formData!.initial.date, formData!.initial.moca],
+                  ...formData!.follow.map((f) => [f.date, f.moca]),
+                ],
                 type: "line",
                 areaStyle: {},
               },
-            ],
-          }}
-        ></ReactECharts>
-      </div>
-
-      <h4>Barthel index score</h4>
-      <div className="card relative bg-slate-100 my-6">
-        <ReactECharts
-          style={{ width: "1200px", height: "300px" }}
-          option={{
-            xAxis: {
-              type: "category",
-              boundaryGap: false,
-              data: ["ก่อนผ่าตัด", "1 สัปดาห์", "1 เดือน", "3 เดือน", "1 ปี"],
-            },
-            yAxis: {
-              type: "value",
-            },
-            series: [
               {
-                data: [8, 14, 16, 17, 20],
+                name: "ADL",
+                data: [
+                  [formData!.initial.date, formData!.initial.barthelIndex],
+                  ...formData!.follow.map((f) => [f.date, f.barthelIndex]),
+                ],
                 type: "line",
                 color: "#77DD77",
                 areaStyle: {},
@@ -79,9 +180,6 @@ const AdminUserDataPage: React.FC = () => {
         <div>
           การได้รับเลือดในห้องผ่าตัด (Perioperative blood transfusion) Yes{" "}
         </div>
-        <div>
-          การได้รับเลือดในห้องผ่าตัด (Perioperative blood transfusion) Yes{" "}
-        </div>
         <div>ระยะเวลาการผ่าตัด Operative time (min) 30</div>
         <hr />
         <div>คะแนน MOCA test 5</div>
@@ -108,6 +206,8 @@ const AdminUserDataPage: React.FC = () => {
         <div>ความสามารถในการใช้ชีวิตประจำวัน (Barthel index score) 20</div>
       </div>
     </div>
+  ) : (
+    <div>f</div>
   );
 };
 export default AdminUserDataPage;

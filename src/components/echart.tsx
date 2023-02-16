@@ -43,6 +43,7 @@ export function ReactECharts({
 
   useEffect(() => {
     // Update chart
+    console.log(option);
     if (chartRef.current !== null) {
       const chart = getInstanceByDom(chartRef.current);
       chart?.setOption(option, settings);

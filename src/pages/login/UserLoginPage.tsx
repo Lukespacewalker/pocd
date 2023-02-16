@@ -19,7 +19,7 @@ const UserLoginPage: React.FC = () => {
       <div className="card p-3">
         <h5 className="text-center mb-3">ผู้ป่วย</h5>
         <Form
-          name="basic"
+          name="login"
           labelCol={{ span: 8 }}
           wrapperCol={{ span: 16 }}
           style={{ maxWidth: 600 }}
@@ -58,6 +58,10 @@ const UserLoginPage: React.FC = () => {
             </Button>
           </Form.Item>
         </Form>
+        <hr className="my-2"/>
+        <div className="py-3">
+          ใช้ HealthTAG ในการเข้าสู่ระบบ
+        </div>
       </div>
     </div>
   );
