@@ -32,7 +32,9 @@ function getItem(
 }
 
 const items: MenuItem[] = [
-  getItem("ผู้ป่วย", "1", <UserOutlined />) /*
+  getItem("ผู้ป่วย", "1", <UserOutlined />),
+  getItem("เนื้อหา", "2", <FileOutlined />)
+  /*
   getItem("Option 2", "2", <DesktopOutlined />),
   getItem("User", "sub1", <UserOutlined />, [
     getItem("Tom", "3"),
