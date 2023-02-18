@@ -1,12 +1,14 @@
 import { ReactECharts } from "@components/echart";
 import { useEffect, useState } from "react";
-import { Timeline, List } from 'antd';
+import { Timeline, List, Typography } from "antd";
+
+const { Title } = Typography;
 
 class FormData {
   public moca: number = 0;
   public barthelIndex: number = 0;
 
-  public date: Date = new Date()
+  public date: Date = new Date();
 
   public constructor(init?: Partial<FormData>) {
     Object.assign(this, init);
@@ -43,7 +45,7 @@ class InitialFormData extends FormData {
 }
 
 const FormViewer: React.FC<{ formData: FormData }> = ({ formData }) => {
-  let data: Array<{ title: string, value?: boolean | number }> = [
+  let data: Array<{ title: string; value?: boolean | number }> = [
     {
       title: "ความสามารถในการใช้ชีวิตประจำวัน Barthel index score",
       value: formData.barthelIndex,
@@ -51,81 +53,96 @@ const FormViewer: React.FC<{ formData: FormData }> = ({ formData }) => {
     {
       title: "คะแนน MOCA",
       value: formData.moca,
-    }
-  ]
+    },
+  ];
 
   if (formData instanceof InitialFormData) {
-    let ifd = formData as InitialFormData
-    data = [...data, {
-      title: "ประวัติ Dementia",
-      value: ifd.hasDementia
-    }, {
-      title: "ประวัติ Stoke",
-      value: ifd.hasStroke
-    }, {
-      title: "ประวัติ Dementia",
-      value: ifd.hasDiabetes
-    }, {
-      title: "ประวัติ Cardiac Surgery",
-      value: ifd.hasCardiacSurgery
-    }, {
-      title: "ปริมาณ mg ของยา Benzodiazepene ที่ใช้ก่อนผ่าตัด",
-      value: ifd.benzodiazepeneBeforeSurgery
-    }, {
-      title: "ปริมาณ mg ของยา Benzodiazepene ที่ใช้ระหว่างผ่าตัด",
-      value: ifd.benzodiazepeneDuringSurgery
-    }, {
-      title: "ยา Dexmedetomidine ระหว่างผ่าตัด",
-      value: ifd.useDexmedetomidine
-    }, {
-      title: "ประวัติ Desaturation ระหว่างผ่าตัด",
-      value: ifd.hasIntraoperativeDesaturation
-    }, {
-      title: "ประวัติ Hypotension ระหว่างผ่าตัด",
-      value: ifd.hasIntraoperativeHypotension
-    }, {
-      title: "ประวัติได้รับเลือดระหว่างผ่าตัด",
-      value: ifd.hasPerioperativeBloodTransfusion
-    }, {
-      title: "NIRS Monitoring",
-      value: ifd.hasNIRSMonitoring
-    }, {
-      title: "BIS Monitoring",
-      value: ifd.hasBISMonitoring
-    }, {
-      title: "ปริมาณเลือดที่เสียระหว่างผ่าตัด",
-      value: ifd.intraoperativeBloodLoss
-    }, {
-      title: "เวลาที่ใช้ผ่าตัด",
-      value: ifd.operativeTime
-    }
-    ]
+    let ifd = formData as InitialFormData;
+    data = [
+      ...data,
+      {
+        title: "ประวัติ Dementia",
+        value: ifd.hasDementia,
+      },
+      {
+        title: "ประวัติ Stoke",
+        value: ifd.hasStroke,
+      },
+      {
+        title: "ประวัติ Dementia",
+        value: ifd.hasDiabetes,
+      },
+      {
+        title: "ประวัติ Cardiac Surgery",
+        value: ifd.hasCardiacSurgery,
+      },
+      {
+        title: "ปริมาณ mg ของยา Benzodiazepene ที่ใช้ก่อนผ่าตัด",
+        value: ifd.benzodiazepeneBeforeSurgery,
+      },
+      {
+        title: "ปริมาณ mg ของยา Benzodiazepene ที่ใช้ระหว่างผ่าตัด",
+        value: ifd.benzodiazepeneDuringSurgery,
+      },
+      {
+        title: "ยา Dexmedetomidine ระหว่างผ่าตัด",
+        value: ifd.useDexmedetomidine,
+      },
+      {
+        title: "ประวัติ Desaturation ระหว่างผ่าตัด",
+        value: ifd.hasIntraoperativeDesaturation,
+      },
+      {
+        title: "ประวัติ Hypotension ระหว่างผ่าตัด",
+        value: ifd.hasIntraoperativeHypotension,
+      },
+      {
+        title: "ประวัติได้รับเลือดระหว่างผ่าตัด",
+        value: ifd.hasPerioperativeBloodTransfusion,
+      },
+      {
+        title: "NIRS Monitoring",
+        value: ifd.hasNIRSMonitoring,
+      },
+      {
+        title: "BIS Monitoring",
+        value: ifd.hasBISMonitoring,
+      },
+      {
+        title: "ปริมาณเลือดที่เสียระหว่างผ่าตัด",
+        value: ifd.intraoperativeBloodLoss,
+      },
+      {
+        title: "เวลาที่ใช้ผ่าตัด",
+        value: ifd.operativeTime,
+      },
+    ];
   }
 
   const valueRenderer = (value?: boolean | number) => {
     if (typeof value == "number") {
-      return value
+      return value;
+    } else if (typeof value == "boolean") {
+      return value ? "ใช่" : "ไม่ใช่";
+    } else {
+      return "ไม่มี";
     }
-    else if (typeof value == "boolean") {
-      return value ? "ใช่" : "ไม่ใช่"
-    }
-    else {
-      return "ไม่มี"
-    }
-  }
+  };
 
-  return <List
-    itemLayout="horizontal"
-    dataSource={data}
-    renderItem={(item) => (
-      <List.Item>
-        <List.Item.Meta
-          avatar={valueRenderer(item.value)}
-          title={item.title}
-        />
-      </List.Item>
-    )}
-  />
+  return (
+    <List
+      itemLayout="horizontal"
+      dataSource={data}
+      renderItem={(item) => (
+        <List.Item>
+          <List.Item.Meta
+            avatar={valueRenderer(item.value)}
+            title={item.title}
+          />
+        </List.Item>
+      )}
+    />
+  );
 };
 
 const AdminUserDataPage: React.FC = () => {
@@ -179,16 +196,15 @@ const AdminUserDataPage: React.FC = () => {
         date: new Date("2023-01-01T12:00:00+07:00"),
         moca: 50,
         barthelIndex: 90,
-      })
-    ]
+      }),
+    ];
     setFormData(seeds);
     setIsReady(true);
   }, []);
 
   return formData ? (
     <section className="p-6">
-      <h3>นาย ปุณพจน์ พัฒนปรีชา</h3>
-      <h4>แผนภูมิ</h4>
+      <Title>นาย ปุณพจน์ พัฒนปรีชา</Title>
       <div className="card relative bg-slate-100 my-6">
         <ReactECharts
           style={{ width: "1200px", height: "300px" }}
@@ -231,15 +247,22 @@ const AdminUserDataPage: React.FC = () => {
         ></ReactECharts>
       </div>
 
-      <h4>ประวัติการตอบแบบสอบถาม</h4>
+      <Title level={2}>ประวัติการตอบแบบสอบถาม</Title>
       <Timeline
         mode="alternate"
-        items={formData.map(fd => ({
-          label: fd.date.toLocaleDateString("th-TH", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: "numeric", minute: "numeric", second: "numeric" }),
-          children: <FormViewer formData={fd} />
+        items={formData.map((fd) => ({
+          label: fd.date.toLocaleDateString("th-TH", {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+            hour: "numeric",
+            minute: "numeric",
+            second: "numeric",
+          }),
+          children: <FormViewer formData={fd} />,
         }))}
       />
-
     </section>
   ) : (
     <div>f</div>

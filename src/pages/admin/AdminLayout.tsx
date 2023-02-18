@@ -9,9 +9,16 @@ import {
 import type { MenuProps } from "antd";
 import { Breadcrumb, Layout, Menu, theme } from "antd";
 import AdminUserPage from "@pages/admin/AdminUserPage";
-import { Navigate, Route, Routes, useLocation } from "react-router-dom";
+import {
+  Navigate,
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import { AppRoutes } from "@/AppRoutes";
 import AdminUserDataPage from "./AdminUserDataPage";
+import AdminInfoPage from "./AdminInfoPage";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -32,8 +39,16 @@ function getItem(
 }
 
 const items: MenuItem[] = [
-  getItem("ผู้ป่วย", "1", <UserOutlined />),
-  getItem("เนื้อหา", "2", <FileOutlined />)
+  getItem(
+    "ผู้ป่วย",
+    AppRoutes.Admin.UserManager.Root.absolute,
+    <UserOutlined />
+  ),
+  getItem(
+    "เนื้อหา",
+    AppRoutes.Admin.InfoManager.Root.absolute,
+    <FileOutlined />
+  ),
   /*
   getItem("Option 2", "2", <DesktopOutlined />),
   getItem("User", "sub1", <UserOutlined />, [
@@ -45,7 +60,7 @@ const items: MenuItem[] = [
     getItem("Team 1", "6"),
     getItem("Team 2", "8"),
   ]),
-  getItem("Files", "9", <FileOutlined />),*/,
+  getItem("Files", "9", <FileOutlined />),*/
 ];
 
 const AdminLayout: React.FC = () => {
@@ -55,6 +70,11 @@ const AdminLayout: React.FC = () => {
   } = theme.useToken();
 
   const location = useLocation();
+  const navigate = useNavigate();
+
+  const menuOnClickHandler: MenuProps["onClick"] = (e) => {
+    navigate(e.key);
+  };
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
@@ -71,8 +91,9 @@ const AdminLayout: React.FC = () => {
           }}
         />
         <Menu
+          onClick={menuOnClickHandler}
           theme="dark"
-          defaultSelectedKeys={["1"]}
+          selectedKeys={[location.pathname]}
           mode="inline"
           items={items}
         />
@@ -89,6 +110,10 @@ const AdminLayout: React.FC = () => {
               <Route
                 path={AppRoutes.Admin.UserManager.Root.route}
                 element={<AdminUserPage />}
+              />
+              <Route
+                path={AppRoutes.Admin.InfoManager.Root.route}
+                element={<AdminInfoPage />}
               />
               <Route
                 path={AppRoutes.Admin.UserManager.Layout.route}

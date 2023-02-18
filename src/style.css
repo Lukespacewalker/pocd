@@ -1,0 +1,42 @@
+/*@tailwind base;*/
+@tailwind components;
+@tailwind utilities;
+@import url("styles/_typography.css");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@200;400;600&family=Nunito:ital,wght@0,200;0,400;0,600;1,200;1,400;1,600&family=Sarabun:ital,wght@0,200;0,400;0,600;1,200;1,400;1,600&display=swap");
+@layer components {
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+  }
+
+@layer utilities {
+  .bg-glass {
+    background: rgba(255, 255, 255, 0.9);
+  }
+
+  .shadow-card {
+    --tw-shadow: 0 2px 4px 1px rgb(0 0 0 / 0.05);
+    --tw-shadow-colored: 0 2px 4px 1px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+      var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  }
+}
+
+@layer components {
+  .card {
+    @apply rounded-lg bg-glass overflow-hidden shadow-card;
+  }
+
+  .btn {
+    @apply text-white hover:text-slate-800 transition-all p-3 hover:bg-slate-300 bg-slate-500 cursor-pointer;
+  }
+}
+
+@layer components {
+  .ant-btn-primary {
+    background-color: #1677ff !important;
+  }
+}

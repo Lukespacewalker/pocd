@@ -51,6 +51,7 @@ const userRoot = root + "user";
 const adminRoot = root + "admin";
 const loginRoot = root + "login";
 const userManagerRoute = new Route("user-manager", adminRoot);
+const infoManagerRoute = new Route("info-manager", adminRoot);
 export const AppRoutes = {
   User: {
     Root: userRoot,
@@ -59,9 +60,15 @@ export const AppRoutes = {
   Admin: {
     Root: adminRoot,
     Layout: new Route("/*", adminRoot),
+
     UserManager: {
       Root: userManagerRoute,
       Layout: new Route("/*", userManagerRoute.absolute),
+    },
+
+    InfoManager: {
+      Root: infoManagerRoute,
+      Layout: new Route("/*", infoManagerRoute.absolute),
     },
   },
   Login: {
