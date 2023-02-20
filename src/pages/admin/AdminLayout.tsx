@@ -19,6 +19,7 @@ import {
 import { AppRoutes } from "@/AppRoutes";
 import AdminUserDataPage from "./AdminUserDataPage";
 import AdminInfoPage from "./AdminInfoPage";
+import { HealthTAGFooter } from "@/components/Footer";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -98,14 +99,14 @@ const AdminLayout: React.FC = () => {
           items={items}
         />
       </Sider>
-      <Layout className="site-layout">
+      <Layout className="site-layout bg-gradient-primary-light-login">
         <Header style={{ padding: 0, background: colorBgContainer }} />
-        <Content style={{ margin: "0 16px" }}>
+        <Content style={{ margin: "0 16px", background:"transparent"}}>
           <Breadcrumb style={{ margin: "16px 0" }}>
             <Breadcrumb.Item>ผู้ดูแลระบบ</Breadcrumb.Item>
             <Breadcrumb.Item>{location.pathname}</Breadcrumb.Item>
           </Breadcrumb>
-          <div className="bg-white rounded-xl">
+          <div className="bg-white rounded-xl p-6">
             <Routes location={location} key={location.pathname}>
               <Route
                 path={AppRoutes.Admin.UserManager.Root.route}
@@ -122,8 +123,8 @@ const AdminLayout: React.FC = () => {
             </Routes>
           </div>
         </Content>
-        <Footer style={{ textAlign: "center" }}>
-          Prototype HealthTAG 2023. Ant Design. Tailwind.
+        <Footer style={{ textAlign: "center", background:"transparent" }}>
+          <HealthTAGFooter />
         </Footer>
       </Layout>
     </Layout>

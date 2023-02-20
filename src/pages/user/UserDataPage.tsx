@@ -1,49 +1,243 @@
-import { ReactECharts } from "components/echart";
+import { ReactECharts } from "@components/echart";
+import { useEffect, useState } from "react";
+import { Timeline, List, Typography } from "antd";
+
+const { Title } = Typography;
+
+class FormData {
+  public moca: number = 0;
+  public barthelIndex: number = 0;
+
+  public date: Date = new Date();
+
+  public constructor(init?: Partial<FormData>) {
+    Object.assign(this, init);
+  }
+}
+
+class InitialFormData extends FormData {
+  public constructor(init?: Partial<InitialFormData>) {
+    super();
+    Object.assign(this, init);
+  }
+
+  public hasDementia: boolean = false;
+  public hasStroke: boolean = false;
+  public hasDiabetes: boolean = false;
+  public hasCardiacSurgery: boolean = false;
+
+  public benzodiazepeneBeforeSurgery?: number;
+  public benzodiazepeneDuringSurgery?: number;
+
+  public useDexmedetomidine: boolean = false;
+
+  public hasIntraoperativeDesaturation: boolean = false;
+  public hasIntraoperativeHypotension: boolean = false;
+
+  public hasNIRSMonitoring: boolean = false;
+  public hasBISMonitoring: boolean = false;
+
+  public intraoperativeBloodLoss: number = 0;
+
+  public operativeTime: number = 0;
+
+  public hasPerioperativeBloodTransfusion: boolean = false;
+}
+
+const FormViewer: React.FC<{ formData: FormData }> = ({ formData }) => {
+  let data: Array<{ title: string; value?: boolean | number }> = [
+    {
+      title: "ความสามารถในการใช้ชีวิตประจำวัน Barthel index score",
+      value: formData.barthelIndex,
+    },
+    {
+      title: "คะแนน MOCA",
+      value: formData.moca,
+    },
+  ];
+
+  if (formData instanceof InitialFormData) {
+    let ifd = formData as InitialFormData;
+    data = [
+      ...data,
+      {
+        title: "ประวัติ Dementia",
+        value: ifd.hasDementia,
+      },
+      {
+        title: "ประวัติ Stoke",
+        value: ifd.hasStroke,
+      },
+      {
+        title: "ประวัติ Dementia",
+        value: ifd.hasDiabetes,
+      },
+      {
+        title: "ประวัติ Cardiac Surgery",
+        value: ifd.hasCardiacSurgery,
+      },
+      {
+        title: "ปริมาณ mg ของยา Benzodiazepene ที่ใช้ก่อนผ่าตัด",
+        value: ifd.benzodiazepeneBeforeSurgery,
+      },
+      {
+        title: "ปริมาณ mg ของยา Benzodiazepene ที่ใช้ระหว่างผ่าตัด",
+        value: ifd.benzodiazepeneDuringSurgery,
+      },
+      {
+        title: "ยา Dexmedetomidine ระหว่างผ่าตัด",
+        value: ifd.useDexmedetomidine,
+      },
+      {
+        title: "ประวัติ Desaturation ระหว่างผ่าตัด",
+        value: ifd.hasIntraoperativeDesaturation,
+      },
+      {
+        title: "ประวัติ Hypotension ระหว่างผ่าตัด",
+        value: ifd.hasIntraoperativeHypotension,
+      },
+      {
+        title: "ประวัติได้รับเลือดระหว่างผ่าตัด",
+        value: ifd.hasPerioperativeBloodTransfusion,
+      },
+      {
+        title: "NIRS Monitoring",
+        value: ifd.hasNIRSMonitoring,
+      },
+      {
+        title: "BIS Monitoring",
+        value: ifd.hasBISMonitoring,
+      },
+      {
+        title: "ปริมาณเลือดที่เสียระหว่างผ่าตัด",
+        value: ifd.intraoperativeBloodLoss,
+      },
+      {
+        title: "เวลาที่ใช้ผ่าตัด",
+        value: ifd.operativeTime,
+      },
+    ];
+  }
+
+  const valueRenderer = (value?: boolean | number) => {
+    if (typeof value == "number") {
+      return value;
+    } else if (typeof value == "boolean") {
+      return value ? "ใช่" : "ไม่ใช่";
+    } else {
+      return "ไม่มี";
+    }
+  };
+
+  return (
+    <List
+      itemLayout="horizontal"
+      dataSource={data}
+      renderItem={(item) => (
+        <List.Item>
+          <List.Item.Meta
+            avatar={valueRenderer(item.value)}
+            title={item.title}
+          />
+        </List.Item>
+      )}
+    />
+  );
+};
 
 const UserDataPage: React.FC = () => {
-  return (
-    <div className="p-6">
-      <h3>นาย ปุณพจน์ พัฒนปรีชา</h3>
-      <h4>MOCA</h4>
+  const [formData, setFormData] = useState<Array<FormData>>();
+  const [ready, setIsReady] = useState(false);
+  useEffect(() => {
+    let seeds: Array<FormData> = [
+      new InitialFormData({
+        date: new Date("2022-01-01T12:00:00+07:00"),
+        moca: 30,
+        barthelIndex: 60,
+
+        hasDementia: false,
+        hasStroke: false,
+        hasDiabetes: true,
+        hasCardiacSurgery: false,
+
+        benzodiazepeneBeforeSurgery: 10,
+        benzodiazepeneDuringSurgery: 20,
+
+        useDexmedetomidine: true,
+
+        hasIntraoperativeDesaturation: false,
+        hasIntraoperativeHypotension: false,
+
+        hasNIRSMonitoring: true,
+        hasBISMonitoring: true,
+
+        intraoperativeBloodLoss: 300,
+
+        operativeTime: 90,
+
+        hasPerioperativeBloodTransfusion: true,
+      }),
+      new FormData({
+        date: new Date("2022-01-08T12:00:00+07:00"),
+        moca: 20,
+        barthelIndex: 40,
+      }),
+      new FormData({
+        date: new Date("2022-02-01T12:00:00+07:00"),
+        moca: 30,
+        barthelIndex: 60,
+      }),
+      new FormData({
+        date: new Date("2022-04-01T12:00:00+07:00"),
+        moca: 40,
+        barthelIndex: 80,
+      }),
+      new FormData({
+        date: new Date("2023-01-01T12:00:00+07:00"),
+        moca: 50,
+        barthelIndex: 90,
+      }),
+    ];
+    setFormData(seeds);
+    setIsReady(true);
+  }, []);
+
+  return formData ? (
+    <section>
+      <Title>นาย ปุณพจน์ พัฒนปรีชา</Title>
       <div className="card relative bg-slate-100 my-6">
         <ReactECharts
-          style={{ width: "600px", height: "300px" }}
+          style={{ width: "1200px", height: "300px" }}
           option={{
-            xAxis: {
-              type: "category",
-              boundaryGap: false,
-              data: ["ก่อนผ่าตัด", "1 สัปดาห์", "1 เดือน", "3 เดือน", "1 ปี"],
+            legend: {
+              data: ["MOCA", "ADL"],
             },
+            tooltip: {
+              trigger: "axis",
+            },
+            xAxis: {
+              type: "time",
+              boundaryGap: false,
+              /*axisLabel: {
+                formatter: (value: Date)=> {
+                  console.log(value)
+                  return value.toISOString();
+                },
+              },*/
+            } as any,
             yAxis: {
               type: "value",
             },
             series: [
               {
-                data: [5, 6, 8, 10, 11],
+                name: "MOCA",
+                data: formData!.map((f) => [f.date, f.moca]),
                 type: "line",
                 areaStyle: {},
               },
-            ],
-          }}
-        ></ReactECharts>
-      </div>
-
-      <h4>Barthel index score</h4>
-      <div className="card relative bg-slate-100 my-6">
-        <ReactECharts
-          style={{ width: "600px", height: "300px" }}
-          option={{
-            xAxis: {
-              type: "category",
-              boundaryGap: false,
-              data: ["ก่อนผ่าตัด", "1 สัปดาห์", "1 เดือน", "3 เดือน", "1 ปี"],
-            },
-            yAxis: {
-              type: "value",
-            },
-            series: [
               {
-                data: [8, 14, 16, 17, 20],
+                name: "ADL",
+                data: formData!.map((f) => [f.date, f.barthelIndex]),
                 type: "line",
                 color: "#77DD77",
                 areaStyle: {},
@@ -53,61 +247,25 @@ const UserDataPage: React.FC = () => {
         ></ReactECharts>
       </div>
 
-      <h4>ประวัติการตอบแบบสอบถาม</h4>
-      <h5>ก่อนผ่าตัด</h5>
-      <div className="card my-3 bg-slate-100 flex flex-col gap-1 p-1">
-        <div>ภาวะสมองเสื่อม (dementia) Yes</div>
-        <div>ประวัติโรคหลอดเลือดสมอง (previous stroke) Yes</div>
-        <div>โรคเบาหวาน (Diabetes mellitus) Yes</div>
-        <div>การผ่าตัดหัวใจ (Cardiac surgery) Yes</div>
-        <div>
-          ขนาดยา Benzodiazepine ก่อนผ่าตัด Oral benzodiazepine premedication
-          (total dose in mg) 5
-        </div>
-        <div>
-          ขนาดยา Benzodiazepine ระหว่างผ่าตัด Intravenous benzodiazepine
-          premedication and - intraoperative use (total dose in mg) 10
-        </div>
-        <div>การใช้ยา Dexmedetomidine Yes</div>
-        <div>
-          ภาวะออกซิเจนต่ำระหว่างผ่าตัด (intraoperative desaturation) Yes
-        </div>
-        <div>ภาวะความดันต่ำระหว่างผ่าตัด (intraoperative hypotension) Yes</div>
-        <div>การตรวจติดตามระดับออกซิเจนในสมองด้วย NIRS monitoring Yes </div>
-        <div>การตรวจติดตามความลึกการดมยาสลบโดยใช้ BIS monitoring Yes </div>
-        <div>ปริมาณเลือดที่เสีย (Intraoperative blood loss (mL)) 500 </div>
-        <div>
-          การได้รับเลือดในห้องผ่าตัด (Perioperative blood transfusion) Yes{" "}
-        </div>
-        <div>
-          การได้รับเลือดในห้องผ่าตัด (Perioperative blood transfusion) Yes{" "}
-        </div>
-        <div>ระยะเวลาการผ่าตัด Operative time (min) 30</div>
-        <hr />
-        <div>คะแนน MOCA test 5</div>
-        <div>ความสามารถในการใช้ชีวิตประจำวัน (Barthel index score) 8</div>
-      </div>
-      <h5>1 สัปดาห์</h5>
-      <div className="card my-3 bg-slate-50 flex flex-col gap-1 p-1">
-        <div>คะแนน MOCA test 6</div>
-        <div>ความสามารถในการใช้ชีวิตประจำวัน (Barthel index score) 14</div>
-      </div>
-      <h5>1 เดือน</h5>
-      <div className="card my-3 bg-slate-50 flex flex-col gap-1 p-1">
-        <div>คะแนน MOCA test 8</div>
-        <div>ความสามารถในการใช้ชีวิตประจำวัน (Barthel index score) 16</div>
-      </div>
-      <h5>3 เดือน</h5>
-      <div className="card my-3 bg-slate-50 flex flex-col gap-1 p-1">
-        <div>คะแนน MOCA test 10</div>
-        <div>ความสามารถในการใช้ชีวิตประจำวัน (Barthel index score) 17</div>
-      </div>
-      <h5>1 ปี</h5>
-      <div className="card my-3 bg-slate-50 flex flex-col gap-1 p-1">
-        <div>คะแนน MOCA test 11</div>
-        <div>ความสามารถในการใช้ชีวิตประจำวัน (Barthel index score) 20</div>
-      </div>
-    </div>
+      <Title level={2}>ประวัติการตอบแบบสอบถาม</Title>
+      <Timeline
+        mode="alternate"
+        items={formData.map((fd) => ({
+          label: fd.date.toLocaleDateString("th-TH", {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+            hour: "numeric",
+            minute: "numeric",
+            second: "numeric",
+          }),
+          children: <FormViewer formData={fd} />,
+        }))}
+      />
+    </section>
+  ) : (
+    <div>f</div>
   );
 };
 export default UserDataPage;

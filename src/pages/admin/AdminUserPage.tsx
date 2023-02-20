@@ -4,6 +4,7 @@ import { Breadcrumb, Layout, Menu, theme, Space, Table, Tag } from "antd";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { AppRoutes } from "@/AppRoutes";
+import Title from "antd/es/typography/Title";
 /* TABLE */
 interface DataType {
   key: string;
@@ -42,13 +43,13 @@ const AdminUserPage: React.FC = () => {
 
   const columns: ColumnsType<DataType> = [
     {
-      title: t("name"),
+      title: "ชื่อ-นามสกุล",
       dataIndex: "name",
       key: "name",
       render: (text) => <a>{text}</a>,
     },
     {
-      title: t("age"),
+      title: "อายุ",
       dataIndex: "age",
       key: "age",
     },
@@ -77,7 +78,15 @@ const AdminUserPage: React.FC = () => {
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <a onClick={()=>navigate(AppRoutes.Admin.UserManager.Root.absolute+"/"+record.key)}>ดูข้อมูล</a>
+          <a
+            onClick={() =>
+              navigate(
+                AppRoutes.Admin.UserManager.Root.absolute + "/" + record.key
+              )
+            }
+          >
+            ดูข้อมูล
+          </a>
           <a>แก้ไข</a>
           <a className="text-red-500">ลบ</a>
         </Space>
@@ -89,7 +98,12 @@ const AdminUserPage: React.FC = () => {
     token: { colorBgContainer },
   } = theme.useToken();
 
-  return <Table columns={columns} dataSource={data} />;
+  return (
+    <main>
+      <Title>รายชื่อผู้ป่วย</Title>
+      <Table columns={columns} dataSource={data} />
+    </main>
+  );
 };
 
 export default AdminUserPage;

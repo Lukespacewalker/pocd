@@ -7,7 +7,7 @@ const UserLoginPage: React.FC = () => {
   const navigate = useNavigate();
 
   const onFinish = (values: any) => {
-    navigate(AppRoutes.User.Root);
+    navigate(AppRoutes.User.Data.absolute);
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -15,7 +15,7 @@ const UserLoginPage: React.FC = () => {
   };
 
   return (
-    <div className="w-screen h-screen bg-slate-100 flex items-center justify-center">
+    <div className="w-screen h-screen bg-gradient-primary-light-login flex items-center justify-center">
       <div className="card p-3">
         <h5 className="text-center mb-3">ผู้ป่วย</h5>
         <Form

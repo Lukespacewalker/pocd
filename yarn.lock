@@ -344,7 +344,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ctrl/tinycolor@npm:^3.4.0":
+"@ctrl/tinycolor@npm:^3.4.0, @ctrl/tinycolor@npm:^3.6.0":
   version: 3.6.0
   resolution: "@ctrl/tinycolor@npm:3.6.0"
   checksum: 4d1e481b4d7f9bb23d21b5436726034d37c2a1bc751b5169ef29ead0237e96443dbccbcfa887e20c3a65ba1b5e270063bb21b4034eac97561b980cbbd5e92a16
@@ -705,10 +705,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^18.13.0":
-  version: 18.13.0
-  resolution: "@types/node@npm:18.13.0"
-  checksum: 4ea10f8802848b01672bce938f678b6774ca2cee0c9774f12275ab064ae07818419c3e2e41d6257ce7ba846d1ea26c63214aa1dfa4166fa3746291752b8c6416
+"@types/node@npm:^18.14.0":
+  version: 18.14.0
+  resolution: "@types/node@npm:18.14.0"
+  checksum: d83fcf5e4ed544755dd9028f5cbb6b9d46235043159111bb2ad62223729aee581c0144a9f6df8ba73d74011db9ed4ebd7af2fd5e0996714e3beb508a5da8ac5c
   languageName: node
   linkType: hard
 
@@ -841,16 +841,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"antd@npm:^5.2.1":
-  version: 5.2.1
-  resolution: "antd@npm:5.2.1"
+"antd@npm:^5.2.2":
+  version: 5.2.2
+  resolution: "antd@npm:5.2.2"
   dependencies:
     "@ant-design/colors": ^7.0.0
     "@ant-design/cssinjs": ^1.5.6
     "@ant-design/icons": ^5.0.0
     "@ant-design/react-slick": ~1.0.0
     "@babel/runtime": ^7.18.3
-    "@ctrl/tinycolor": ^3.4.0
+    "@ctrl/tinycolor": ^3.6.0
     "@rc-component/mutate-observer": ^1.0.0
     "@rc-component/tour": ~1.6.0
     classnames: ^2.2.6
@@ -895,7 +895,7 @@ __metadata:
   peerDependencies:
     react: ">=16.9.0"
     react-dom: ">=16.9.0"
-  checksum: a3ab7a83a6eaa0b4c9a92c46574cf0dff8a9b6c69d501a303e927b0e7fd15ec81bd06b297dfe4c6bc6f650745c3499d2aa8aa3da4297a9c986d37d3cdb490d7f
+  checksum: e758fb8b1c5604c4f61bf3fab0f272fbf40251ef1dda6c60e824cec1549c92f7e4a4e28ee1260cde703c2a374ba501fa97da9788db4d379e81888473cdb94fc9
   languageName: node
   linkType: hard
 
@@ -1640,12 +1640,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"i18next@npm:^22.4.9":
-  version: 22.4.9
-  resolution: "i18next@npm:22.4.9"
+"i18next@npm:^22.4.10":
+  version: 22.4.10
+  resolution: "i18next@npm:22.4.10"
   dependencies:
     "@babel/runtime": ^7.20.6
-  checksum: 8cce4aaced4857e006fab2c9d4adb0eb1375829e459076be79d4d3532b1be6342b7003a720e187098f17bb276bea46df8b3fc2cf21f0f3a230bd519243048d1a
+  checksum: 731423e3fafe4ecaf0fc3c5867b69ae5c35c9021f7b5aad8392a9bf5cf56fbf1503376ba5aa935f2b21e12a97862fa31be0e4b35e98eefb747e2008b5808e35c
   languageName: node
   linkType: hard
 
@@ -2162,22 +2162,22 @@ __metadata:
   resolution: "pocd2@workspace:."
   dependencies:
     "@ant-design/icons": ^5.0.1
-    "@types/node": ^18.13.0
+    "@types/node": ^18.14.0
     "@types/react": ^18.0.28
     "@types/react-dom": ^18.0.11
     "@vitejs/plugin-react": ^3.1.0
-    antd: ^5.2.1
+    antd: ^5.2.2
     autoprefixer: ^10.4.13
     echarts: ^5.4.1
-    i18next: ^22.4.9
+    i18next: ^22.4.10
     postcss: ^8.4.21
     react: ^18.2.0
     react-dom: ^18.2.0
     react-i18next: ^12.1.5
     react-router-dom: ^6.8.1
-    tailwindcss: ^3.2.6
+    tailwindcss: ^3.2.7
     typescript: ^4.9.5
-    vite: ^4.1.1
+    vite: ^4.1.2
   languageName: unknown
   linkType: soft
 
@@ -3222,9 +3222,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tailwindcss@npm:^3.2.6":
-  version: 3.2.6
-  resolution: "tailwindcss@npm:3.2.6"
+"tailwindcss@npm:^3.2.7":
+  version: 3.2.7
+  resolution: "tailwindcss@npm:3.2.7"
   dependencies:
     arg: ^5.0.2
     chokidar: ^3.5.3
@@ -3254,7 +3254,7 @@ __metadata:
   bin:
     tailwind: lib/cli.js
     tailwindcss: lib/cli.js
-  checksum: 908451ff7b334b2aec2a0ba5bf426a786a3f190b440a1f8ede206d889448ffda3b77349829f06dc297336fd0b5edc696ae5f23b808d6444bb5c689f218e95323
+  checksum: 819446bf67acea1fc738f345d80f328b7bb6e6ef4b24070249a11219307045881cf97baed6258cbdcede7fa18886e9c9c41fd0fa087b3e987cf2948560a2f164
   languageName: node
   linkType: hard
 
@@ -3368,9 +3368,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^4.1.1":
-  version: 4.1.1
-  resolution: "vite@npm:4.1.1"
+"vite@npm:^4.1.2":
+  version: 4.1.2
+  resolution: "vite@npm:4.1.2"
   dependencies:
     esbuild: ^0.16.14
     fsevents: ~2.3.2
@@ -3402,7 +3402,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: aad14b660b69068f6596ab7e760dd71642862996328e404a4d265e090ae0d06c7064cf8415ffb135cd8b79d5157dc1dcb48b56386caaa96a474fb53bdd8cac3d
+  checksum: c3d92b7ab59095498e80e70a7847c7a4c4fd7f16f859c57dc93c0dc09ec57584819a929924e8d8858bdde157f0386ec37322bdb064da7f8f4854c8aa22d0beec
   languageName: node
   linkType: hard
 

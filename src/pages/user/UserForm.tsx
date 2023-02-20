@@ -1,11 +1,13 @@
+import { AppRoutes } from "@/AppRoutes";
 import { Form, Input, Button, Checkbox } from "antd";
+import Title from "antd/es/typography/Title";
 import { useNavigate } from "react-router-dom";
 
 const UserForm: React.FC = () => {
   const navigate = useNavigate();
 
   const onFinish = (values: any) => {
-    //navigate(AppRoutes.User.Root);
+    navigate(AppRoutes.User.Data.absolute);
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -14,22 +16,34 @@ const UserForm: React.FC = () => {
 
   return (
     <div>
-      <h3>บันทึกข้อมูลก่อนผ่าตัด</h3>
+      <Title>บันทึกข้อมูล</Title>
       <div>
         <Form onFinish={onFinish} onFinishFailed={onFinishFailed}>
+          <Form.Item
+            label="วันที่"
+            name="date"
+            rules={[{ required: true, message: "ใส่วันที่" }]}
+          >
+            <Input type="date" />
+          </Form.Item>
           <Form.Item
             label="ผลการวัดความสามารถในการดำเนินชีวิตประจำวัน (Barthel Activity of Daily Living Index:ADL)"
             name="barthalIndexScore"
             rules={[{ required: true, message: "ใส่คะแนน", min: 0, max: 100 }]}
           >
-            <Input />
+            <Input type="number"/>
           </Form.Item>
           <Form.Item
             label="ผลการวัด Montreal Cognitive Assessment (MoCA)"
             name="moca"
             rules={[{ required: true, message: "ใส่คะแนน" }]}
           >
-            <Input />
+            <Input type="number" />
+          </Form.Item>
+          <Form.Item>
+            <Button type="primary" htmlType="submit">
+              บันทึก
+            </Button>
           </Form.Item>
         </Form>
       </div>

@@ -56,6 +56,8 @@ export const AppRoutes = {
   User: {
     Root: userRoot,
     Layout: new Route("/*", userRoot),
+    Data: new Route("data",userRoot),
+    Form: new Route("form",userRoot),
   },
   Admin: {
     Root: adminRoot,

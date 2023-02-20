@@ -1,0 +1,13 @@
+@layer utilities {
+  .bg-gradient-primary-light-login {
+    background: radial-gradient(
+      circle at -15%,
+      hsl(198deg, 79%, 97%),
+      hsl(234deg, 34%, 97%)
+    );
+  }
+
+  .bg-glass {
+    background: rgba(255, 255, 255, 0.9);
+  }
+}

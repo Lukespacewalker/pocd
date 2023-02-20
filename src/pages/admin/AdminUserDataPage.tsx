@@ -203,7 +203,7 @@ const AdminUserDataPage: React.FC = () => {
   }, []);
 
   return formData ? (
-    <section className="p-6">
+    <main>
       <Title>นาย ปุณพจน์ พัฒนปรีชา</Title>
       <div className="card relative bg-slate-100 my-6">
         <ReactECharts
@@ -263,7 +263,7 @@ const AdminUserDataPage: React.FC = () => {
           children: <FormViewer formData={fd} />,
         }))}
       />
-    </section>
+    </main>
   ) : (
     <div>f</div>
   );
